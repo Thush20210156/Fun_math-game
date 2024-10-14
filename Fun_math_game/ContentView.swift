@@ -34,6 +34,8 @@ struct ContentView: View {
     @State private var resultMessage: String = ""
     @State private var showAlert = false
     @State private var questionSubmitted = false
+    @State private var resultImage: String = ""
+
     
     var body: some View {
         TabView {
@@ -83,9 +85,23 @@ struct ContentView: View {
                     .padding(.top, 2)
                     .padding(.bottom,10)
                 
-                Text(resultMessage)
-                    .font(.system(size: fontSize))
+//                Text(resultMessage)
+//                    .font(.system(size: fontSize))
+//                    .padding()
+                
+                if questionSubmitted {
+                    HStack {
+                        Image(systemName: resultImage) // Display the corresponding system image
+                            .foregroundColor(resultImage == "checkmark.circle.fill" ? .green : .red)
+                            .font(.system(size: 24)) // Adjust the size of the image
+                        
+                        Text(resultMessage) // Display the result message
+                            .font(.headline)
+                            .foregroundColor(resultImage == "checkmark.circle.fill" ? .green : .red) // Change text color
+                    }
                     .padding()
+                }
+
                 
                 
                 VStack {
@@ -109,20 +125,41 @@ struct ContentView: View {
 
 
                
-                
                 Button("Next") {
-                    generateNewQuestion()
+                    // Check if the question has been submitted
+                    if questionSubmitted {
+                        // Reset input and state for the next question
+                        guessedAnswer = ""
+                        questionSubmitted = false
+                        resultMessage = ""
+                        resultImage = ""
+
+                        // Generate a new question
+                        generateNewQuestion()
+                    } else {
+                        // If the question wasn't submitted, decrement the points
+                      
+                            points -= 1 // Decrease points by 1
+                        
+                        resultMessage = "You lose 1 point for skipping the question."
+                        resultImage = "xmark.circle.fill"
+
+                        // Reset for the next question
+                        guessedAnswer = ""
+                        questionSubmitted = false
+                    }
                 }
                 .padding()
                 .background(Color.green)
                 .foregroundColor(.white)
                 .cornerRadius(10)
-                
+
+                //.disabled(!questionSubmitted) // Disable until the current question is answered
                 Spacer()
             }
             .onAppear(perform: generateNewQuestion)
             .tabItem {
-                Label("Game", systemImage: "gamecontroller")
+                Label("Guess", systemImage: "checkmark.circle.badge.questionmark.fill")
             }
             .alert(isPresented: $showAlert) {
                 Alert(title: Text("Invalid Input"), message: Text("Please enter a numeric answer."), dismissButton: .default(Text("OK")))
@@ -130,7 +167,7 @@ struct ContentView: View {
             
             SettingsView()
                 .tabItem {
-                    Label("Settings", systemImage: "gear")
+                    Label("Settings", systemImage: "gear.circle.fill")
                 }
         }
        .accentColor(systemColor)
@@ -147,11 +184,18 @@ struct ContentView: View {
         if userAnswer == correctAnswer {
             points += 1
             resultMessage = "Congratulations! Correct answer."
+            resultImage = "checkmark.circle.fill"
         } else {
-            if points > 0 { points -= 1 }
+             points -= 1
             resultMessage = "Incorrect. The correct answer is \(correctAnswer)."
+            resultImage = "xmark.circle.fill"
         }
+        
+      
     }
+    
+    
+
     
     // Function to generate a new math question
     func generateNewQuestion() {
