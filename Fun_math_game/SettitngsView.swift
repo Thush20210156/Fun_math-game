@@ -13,6 +13,7 @@ struct SettingsView: View {
     @AppStorage("systemColorString") var systemColorString: String = "blue" // Store color as String
     @State private var fontSize: CGFloat = 16.0 // Use CGFloat in UI
     @State private var systemColor: Color = .blue // Default color
+   
     
     var body: some View {
         NavigationView {

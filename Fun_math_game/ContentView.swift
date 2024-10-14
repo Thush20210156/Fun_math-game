@@ -20,12 +20,30 @@ enum MathOperation: String, CaseIterable {
     }
 }
 
+enum AppColor: String, CaseIterable {
+    case blue, red, green, cyan, yellow, purple
+    
+    var color: Color {
+        switch self {
+        case .blue: return .blue
+        case .red: return .red
+        case .green: return .green
+        case .cyan: return .cyan
+        case .yellow: return .yellow
+        case .purple: return .purple
+        }
+    }
+}
+
+
 struct ContentView: View {
     @AppStorage("points") var points: Int = 0
     @AppStorage("fontSizeDouble") var fontSizeDouble: Double = 16.0 // Store as Double
-    @AppStorage("systemColorString") var systemColorString: String = "blue" // Store color as String
+    @AppStorage("systemColor") var systemColor: String = AppColor.blue.rawValue // Store color as String
+       
+    
     @State private var fontSize: CGFloat = 16.0 // Use CGFloat in UI
-    @State private var systemColor: Color = .blue // Default color
+    //@State private var systemColor: Color = .blue // Default color
     @State private var operand1: Int = 0
     @State private var operand2: Int = 0
     @State private var operation: MathOperation = .addition
@@ -41,7 +59,7 @@ struct ContentView: View {
         TabView {
             VStack {
                 Text("Guess the answer!")
-                    .foregroundColor(.cyan)
+                    .foregroundColor(AppColor(rawValue: systemColor)?.color ?? .cyan) // Set color based on user selection
                     .fontWeight(.bold)
                     .font(.title)
                     .padding(.top, 20)
@@ -50,7 +68,7 @@ struct ContentView: View {
                 Text("What is \(operand1) \(operation.rawValue) \(operand2) = ?")
                     .fontWeight(.bold)
                     .font(.system(size: 22)) // Set font size to 30 or any desired value
-                    .foregroundColor(systemColor)
+                    .foregroundColor(AppColor(rawValue: systemColor)?.color ?? .cyan) // Set color based on user selection
                     .padding()
                 
                 HStack {
@@ -107,6 +125,7 @@ struct ContentView: View {
                 VStack {
                     // Center the title
                     Text("Instructions")
+                        .font(.system(size: CGFloat(fontSize))) // Use the font size from settings
                         .font(.title) // Larger title font
                         .padding(.top, 5)
                         .padding(.bottom,1)
@@ -114,7 +133,7 @@ struct ContentView: View {
                     
                     // Description
                     Text("Submit the correct answer and gain 1 point.Submit a wrong answer or press on 'NEXT' and you will lose 1 point.")
-                        .font(.system(size: 15)) // Smaller description font
+                        .font(.system(size: CGFloat(fontSize))) // Use the font size from settings
                         .padding(.top, 10) // Padding between title and description
                         .lineLimit(nil) // Allows text to wrap to the next line
                         .multilineTextAlignment(.center) // Justify-like effect by aligning leading
@@ -170,7 +189,8 @@ struct ContentView: View {
                     Label("Settings", systemImage: "gear.circle.fill")
                 }
         }
-       .accentColor(systemColor)
+        .accentColor(AppColor(rawValue: systemColor)?.color ?? .cyan) // Set color based on user selection
+       //.accentColor(systemColor)
     }
     
     // Function to submit and check the user's answer
