@@ -11,6 +11,7 @@
 		E0F9F2E22CBD34AE00129172 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F9F2E12CBD34AE00129172 /* ContentView.swift */; };
 		E0F9F2E42CBD34B000129172 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0F9F2E32CBD34B000129172 /* Assets.xcassets */; };
 		E0F9F2E72CBD34B000129172 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0F9F2E62CBD34B000129172 /* Preview Assets.xcassets */; };
+		E0F9F2EE2CBD34FD00129172 /* SettitngsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F9F2ED2CBD34FD00129172 /* SettitngsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		E0F9F2E12CBD34AE00129172 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E0F9F2E32CBD34B000129172 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E0F9F2E62CBD34B000129172 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E0F9F2ED2CBD34FD00129172 /* SettitngsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettitngsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			children = (
 				E0F9F2DF2CBD34AE00129172 /* Fun_math_gameApp.swift */,
 				E0F9F2E12CBD34AE00129172 /* ContentView.swift */,
+				E0F9F2ED2CBD34FD00129172 /* SettitngsView.swift */,
 				E0F9F2E32CBD34B000129172 /* Assets.xcassets */,
 				E0F9F2E52CBD34B000129172 /* Preview Content */,
 			);
@@ -138,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E0F9F2E22CBD34AE00129172 /* ContentView.swift in Sources */,
+				E0F9F2EE2CBD34FD00129172 /* SettitngsView.swift in Sources */,
 				E0F9F2E02CBD34AE00129172 /* Fun_math_gameApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
